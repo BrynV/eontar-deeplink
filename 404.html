@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Eontar Pager</title>
+<style>
+  body { font-family: -apple-system, sans-serif; background: #0A1128; color: #fff; margin: 0;
+         display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
+  .card { padding: 24px; max-width: 420px; }
+  h1 { font-size: 1.4rem; letter-spacing: 0.05em; }
+  p { color: #ccc; line-height: 1.5; }
+  a { color: #FF9F1C; }
+</style>
+</head>
+<body>
+<div class="card">
+  <h1>EONTAR PAGER</h1>
+  <p id="msg">Opening your trip...</p>
+  <p><a href="https://eontar.co.uk">Visit eontar.co.uk</a></p>
+</div>
+<script>
+  // GitHub Pages has no server-side dynamic routing, so any unmatched path
+  // (e.g. /t/<guest_token> or /t/<trip_code>) is served this 404.html — the
+  // documented GH Pages trick for path-segment "routing" on static hosting.
+  // Android's App Links intent-filter (pathPrefix "/t") intercepts this URL
+  // BEFORE the browser loads it whenever the app is installed and verified —
+  // this page is only ever seen when the app isn't installed/verified, or on
+  // a platform without the app (desktop browser, iOS without a native
+  // handler yet). It exists so the link is not a dead end in that case, not
+  // as the primary hand-off mechanism.
+  var path = window.location.pathname;
+  var msg = document.getElementById('msg');
+  if (path.indexOf('/t/') === 0 || path.indexOf('/t/') > -1) {
+    msg.textContent = 'If you have the Eontar Pager app installed, it should open automatically. ' +
+      'Otherwise, please open the Eontar Pager app and enter your trip code manually.';
+  } else {
+    msg.textContent = 'Page not found.';
+  }
+</script>
+</body>
+</html>

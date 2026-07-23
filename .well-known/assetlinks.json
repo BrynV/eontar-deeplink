@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.eontar.eontar_app",
+      "sha256_cert_fingerprints": [
+        "FC:CF:94:92:67:D4:6A:19:B0:10:01:AE:BC:28:04:B1:CC:3D:65:23:28:FF:2D:89:63:6E:97:92:AC:A2:7B:49"
+      ]
+    }
+  }
+]
