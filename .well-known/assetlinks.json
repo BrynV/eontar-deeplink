@@ -5,7 +5,8 @@
       "namespace": "android_app",
       "package_name": "com.eontar.eontar_app",
       "sha256_cert_fingerprints": [
-        "FC:CF:94:92:67:D4:6A:19:B0:10:01:AE:BC:28:04:B1:CC:3D:65:23:28:FF:2D:89:63:6E:97:92:AC:A2:7B:49"
+        "FC:CF:94:92:67:D4:6A:19:B0:10:01:AE:BC:28:04:B1:CC:3D:65:23:28:FF:2D:89:63:6E:97:92:AC:A2:7B:49",
+        "41:71:95:44:F7:A7:77:9F:FD:57:22:9A:42:32:F5:45:5F:C2:F4:65:D1:63:42:BE:E4:9E:2F:03:24:CE:E6:18"
       ]
     }
   }
