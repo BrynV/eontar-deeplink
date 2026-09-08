@@ -12,12 +12,26 @@
   h1 .sub { display: block; font-size: 0.85rem; letter-spacing: 0.05em; color: #ccc; margin-top: 4px; }
   p { color: #ccc; line-height: 1.5; }
   a { color: #FF9F1C; }
+  .play-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 12px 28px;
+    background: #FF9F1C;
+    color: #0A1128;
+    font-weight: bold;
+    letter-spacing: 0.03em;
+    text-decoration: none;
+    border-radius: 4px;
+  }
+  .code-fallback { font-size: 0.8rem; color: #999; margin-top: 24px; }
 </style>
 </head>
 <body>
 <div class="card">
   <h1>EasyQue<span class="sub">by Eontar</span></h1>
   <p id="msg">Opening your trip...</p>
+  <a id="playBtn" class="play-btn" href="https://play.google.com/store/apps/details?id=com.eontar.eontar_app" style="display:none">GET IT ON GOOGLE PLAY</a>
+  <p id="codeFallback" class="code-fallback" style="display:none"></p>
   <p><a href="https://eontar.co.uk">Visit eontar.co.uk</a></p>
 </div>
 <script>
@@ -28,21 +42,44 @@
   // (pathPrefix "/t", "/join") intercepts this URL BEFORE the browser loads
   // it whenever the app is installed and verified — this page is only ever
   // seen when the app isn't installed/verified, or on a platform without the
-  // app (desktop browser, iOS without a native handler yet). It exists so
-  // the link is not a dead end in that case, not as the primary hand-off
-  // mechanism.
+  // app (desktop browser, iOS without a native handler yet).
+  //
+  // The Play Store button below is a deliberate stub, wired up ahead of the
+  // public release (2026-09-08, direct request: "so it already works after
+  // release") — the URL format (?id=com.eontar.eontar_app) is stable and
+  // correct today even while the app is still Internal Testing only; Google
+  // Play will simply show "this item is not available" until the listing
+  // goes public, then the exact same link starts working with zero further
+  // changes needed here.
   var path = window.location.pathname;
   var msg = document.getElementById('msg');
+  var playBtn = document.getElementById('playBtn');
+  var codeFallback = document.getElementById('codeFallback');
+  var isAndroid = /Android/i.test(navigator.userAgent);
+
   if (path.indexOf('/t/') === 0 || path.indexOf('/t/') > -1) {
-    msg.textContent = 'If you have the Eontar Pager app installed, it should open automatically. ' +
-      'Otherwise, please open the Eontar Pager app and enter your trip code manually.';
+    msg.textContent = 'If you have the Eontar Pager app installed, it should open automatically.';
+    if (isAndroid) {
+      playBtn.style.display = 'inline-block';
+      codeFallback.style.display = 'block';
+      codeFallback.textContent = 'Already have the app? Open it and enter your trip code manually.';
+    } else {
+      codeFallback.style.display = 'block';
+      codeFallback.textContent = 'Please open the Eontar Pager app on your Android phone and enter your trip code manually.';
+    }
   } else if (path.indexOf('/join') === 0) {
     var code = new URLSearchParams(window.location.search).get('code');
-    if (code) {
-      msg.textContent = 'Opening Eontar Pager to accept your invite... If the app doesn\'t open ' +
-        'automatically, please open Eontar Pager and enter this code manually: ' + code;
+    var codeMsg = code
+      ? 'enter this code manually: ' + code
+      : 'enter your invite code manually';
+    msg.textContent = 'Opening Eontar Pager to accept your invite...';
+    if (isAndroid) {
+      playBtn.style.display = 'inline-block';
+      codeFallback.style.display = 'block';
+      codeFallback.textContent = 'Already have the app? Open it and ' + codeMsg + '.';
     } else {
-      msg.textContent = 'Please open the Eontar Pager app and enter your invite code manually.';
+      codeFallback.style.display = 'block';
+      codeFallback.textContent = 'Please open the Eontar Pager app on your Android phone and ' + codeMsg + '.';
     }
   } else {
     msg.textContent = 'Page not found.';
