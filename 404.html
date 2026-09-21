@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Eontar Pager</title>
+<title>UGoNext</title>
 <style>
   body { font-family: -apple-system, sans-serif; background: #0A1128; color: #fff; margin: 0;
          display: flex; align-items: center; justify-content: center; min-height: 100vh; text-align: center; }
@@ -28,7 +28,7 @@
 </head>
 <body>
 <div class="card">
-  <h1>Eontar Pager</h1>
+  <h1>UGoNext</h1>
   <p id="msg">Opening your trip...</p>
   <a id="playBtn" class="play-btn" href="https://play.google.com/store/apps/details?id=com.eontar.eontar_app" style="display:none">GET IT ON GOOGLE PLAY</a>
   <p id="codeFallback" class="code-fallback" style="display:none"></p>
@@ -58,28 +58,28 @@
   var isAndroid = /Android/i.test(navigator.userAgent);
 
   if (path.indexOf('/t/') === 0 || path.indexOf('/t/') > -1) {
-    msg.textContent = 'If you have the Eontar Pager app installed, it should open automatically.';
+    msg.textContent = 'If you have the UGoNext app installed, it should open automatically.';
     if (isAndroid) {
       playBtn.style.display = 'inline-block';
       codeFallback.style.display = 'block';
       codeFallback.textContent = 'Already have the app? Open it and enter your trip code manually.';
     } else {
       codeFallback.style.display = 'block';
-      codeFallback.textContent = 'Please open the Eontar Pager app on your Android phone and enter your trip code manually.';
+      codeFallback.textContent = 'Please open the UGoNext app on your Android phone and enter your trip code manually.';
     }
   } else if (path.indexOf('/join') === 0) {
     var code = new URLSearchParams(window.location.search).get('code');
     var codeMsg = code
       ? 'enter this code manually: ' + code
       : 'enter your invite code manually';
-    msg.textContent = 'Opening Eontar Pager to accept your invite...';
+    msg.textContent = 'Opening UGoNext to accept your invite...';
     if (isAndroid) {
       playBtn.style.display = 'inline-block';
       codeFallback.style.display = 'block';
       codeFallback.textContent = 'Already have the app? Open it and ' + codeMsg + '.';
     } else {
       codeFallback.style.display = 'block';
-      codeFallback.textContent = 'Please open the Eontar Pager app on your Android phone and ' + codeMsg + '.';
+      codeFallback.textContent = 'Please open the UGoNext app on your Android phone and ' + codeMsg + '.';
     }
   } else {
     msg.textContent = 'Page not found.';
