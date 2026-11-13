@@ -81,8 +81,24 @@
       codeFallback.style.display = 'block';
       codeFallback.textContent = 'Please open the UGoNext app on your Android phone and ' + codeMsg + '.';
     }
+  } else if (path.indexOf('/partner') === 0) {
+    // Partner connection link (app screen: partnership_connection_screen).
+    msg.textContent = 'Opening UGoNext to connect with your partner...';
+    codeFallback.style.display = 'block';
+    codeFallback.textContent = isAndroid
+      ? 'Already have the app? Open it and enter the partner code manually.'
+      : 'Please open the UGoNext app on your Android phone and enter the partner code manually.';
+    if (isAndroid) { playBtn.style.display = 'inline-block'; }
+  } else if (path.indexOf('/reset-password') === 0) {
+    msg.textContent = 'Opening UGoNext to set a new password...';
+    codeFallback.style.display = 'block';
+    codeFallback.textContent = isAndroid
+      ? 'If the app does not open, install UGoNext, then open this link again on the same phone.'
+      : 'Please open this link on the Android phone where UGoNext is installed.';
+    if (isAndroid) { playBtn.style.display = 'inline-block'; }
   } else {
-    msg.textContent = 'Page not found.';
+    msg.textContent = 'This link opens in the UGoNext app.';
+    if (isAndroid) { playBtn.style.display = 'inline-block'; }
   }
 </script>
 </body>
